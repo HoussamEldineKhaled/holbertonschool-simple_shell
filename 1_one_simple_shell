@@ -1,2 +1,14 @@
+./" Manpage for 1_one_simple_shell
+.TH man 1 "25 February 2025"
+.SH NAME
+1_one_simpple_shell - implement shell
+.SH SYNOPSIS
 
+.SH DESCRIPTION
 
+.SH OPTIONS
+
+.SH BUGS
+
+.SH AUTHOR
+written by Houssam El Dine Khaled and 
