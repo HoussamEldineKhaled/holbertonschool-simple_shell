@@ -11,10 +11,9 @@
 
 extern char **environ;
 
+
 void shell_loop(void);
 void exec_cmd(char *input);
-
-
 
 
 #endif

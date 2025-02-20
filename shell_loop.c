@@ -8,7 +8,6 @@ void shell_loop()
 {
 char *input = NULL;
 size_t len = 0;
-size_t end;
 ssize_t nread;
 while (1)
 {
@@ -25,11 +24,6 @@ break;
 if (input[nread - 1] == '\n')
 {
 input[nread - 1] = '\0';
-}
-end = strlen(input);
-while (end > 0 && input[end - 1] == ' ')
-{
-input[--end] = '\0';
 }
 if (strcmp(input, "\n") == 0)
 {
