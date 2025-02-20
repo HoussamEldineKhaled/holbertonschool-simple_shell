@@ -1,11 +1,8 @@
 #include "shell.h"
-
 /**
  * exec_cmd - execute the command
  * @input: input command
 */
-
-
 void exec_cmd(char *input)
 {
 char *args[2];
