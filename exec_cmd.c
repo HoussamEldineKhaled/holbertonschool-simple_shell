@@ -6,7 +6,7 @@
 void exec_cmd(char *input)
 {
 char *args[2];
-pit_t pid;
+pid_t pid;
 args[0] = strtok(input, "\n");
 args[1] = NULL;
 pid = fork();
