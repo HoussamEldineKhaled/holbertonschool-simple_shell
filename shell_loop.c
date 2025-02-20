@@ -21,6 +21,10 @@ if (nread < 0)
 printf("\n");
 break;
 }
+if (input[nread - 1] == '\n')
+{
+input[nread - 1] = '\0';
+}
 if (strcmp(input, "\n") == 0)
 {
 continue;
