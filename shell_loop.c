@@ -11,7 +11,10 @@ size_t len = 0;
 ssize_t nread;
 while (1)
 {
+if (isatty(STD_FILENO))
+{
 printf("$ ");
+}
 nread = getline(&input, &len, stdin);
 if (nread < 0)
 {
