@@ -19,7 +19,7 @@ if (access(full_path, X_OK) == 0)
 {
 return strdup(full_path);
 }
-token = strok(NULL, ":");
+token = strtok(NULL, ":");
 }
 return NULL;
 }
