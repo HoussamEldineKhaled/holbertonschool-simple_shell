@@ -11,7 +11,7 @@ size_t len = 0;
 ssize_t nread;
 while (1)
 {
-if (isatty(STD_FILENO))
+if (isatty(STDIN_FILENO))
 {
 printf("$ ");
 }
