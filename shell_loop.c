@@ -18,6 +18,10 @@ if (nread < 0)
 printf("\n");
 break;
 }
+if (strcmp(input, "\n") == 0)
+{
+continue;
+}
 exec_cmd(input);
 }
 free(input);
