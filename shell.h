@@ -9,9 +9,7 @@
 #include <errno.h>
 #include <sys/wait.h>
 
-
-
-
-
+void tokenize(char *token, char **array, int i);
+void exec_cmd(pid_t child, char **array, int status);
 
 #endif
