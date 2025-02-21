@@ -1,6 +1,21 @@
 #include "shell.h"
 
 
+/**
+ * startsWithForwardSlash - check forward slash
+ * @str: The filename to be checked
+ * Return 0 if yes and 1 if no
+*/
+
+int startsWithForwardSlash(const char *str)
+{
+if (str != NULL || str[0] == '/')
+{
+return (1);
+}
+return (0);
+}
+
 
 /**
  * get_file_loc - location of file
@@ -63,6 +78,10 @@ char *get_file_path(char *file_name)
 {
 char *full_path;
 char *path = getenv("PATH");
+if (startsWithForwardSlash(file_name) && access(fine_name, X_OK) == 0)
+{
+return (strdup(file_name));
+}
 if (!path)
 {
 perror("Path not found");
