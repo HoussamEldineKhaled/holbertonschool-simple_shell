@@ -1,9 +1,12 @@
 #include "shell.h"
 
 
+
 /**
  * get_file_loc - location of file
- * 
+ * @path: file path
+ * @file_name: file name
+ * Return: NULL or location
 */
 
 
