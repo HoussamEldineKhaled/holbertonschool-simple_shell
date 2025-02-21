@@ -22,13 +22,9 @@ if (nread < 0)
 printf("\n");
 break;
 }
-if (input[nread] == '\n')
+if (input[nread - 1] == '\n')
 {
-input[nread] = '\0';
-}
-if (strcmp(input, "\n") == 0)
-{
-continue;
+input[nread - 1] = '\0';
 }
 exec_cmd(input);
 }
