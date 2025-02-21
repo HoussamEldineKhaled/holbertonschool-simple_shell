@@ -17,16 +17,22 @@ if (isatty(STDIN_FILENO))
 printf("$ ");
 }
 nread = getline(&input, &len, stdin);
-if (nread < 0)
+if (nread == -1)
+{
+if (isatty(STDIN_FILENO))
 {
 printf("\n");
+}
 break;
 }
 if (input[nread - 1] == '\n')
 {
 input[nread - 1] = '\0';
 }
+if (strlen(input) > 0)
+{
 exec_cmd(input);
+}
 }
 free(input);
 }
