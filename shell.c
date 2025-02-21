@@ -24,7 +24,7 @@ array[i] = NULL;
  * @array: command
  * @status: execution status
 */
-void exec_cmd(pid_t child, char **array, int status)
+void exec_cmd(pid_t child, char **array, int status, char *path)
 {
 if (child == -1)
 {
@@ -33,7 +33,7 @@ exit(41);
 }
 if (child == 0)
 {
-if (execve(array[0], array, NULL) == -1)
+if (execve(path, array, NULL) == -1)
 {
 perror("Execution Failure");
 exit(97);
@@ -53,8 +53,7 @@ wait(&status);
 */
 int main(int argc, char *argv[])
 {
-char *buf = NULL;
-char *token = NULL;
+  char *buf = NULL, *token = NULL, *path = NULL;
 char **array = NULL;
 size_t count = 0;
 ssize_t nread;
@@ -75,8 +74,9 @@ token = strtok(buf, "\n");
 array = malloc(sizeof(char*) * 1024);
 i = 0;
 tokenize(token, array, i);
+path = get_file_path(array[0]);
 child = fork();
-exec_cmd(child, array, status);
+exec_cmd(child, array, status, path);
 printf("%s", buf);
 }
 free(buf);
