@@ -1,6 +1,4 @@
 #include "shell.h"
-
-
 /**
  * startsWithForwardSlash - check forward slash
  * @str: The filename to be checked
@@ -9,7 +7,7 @@
 
 int startsWithForwardSlash(const char *str)
 {
-if (str != NULL || str[0] == '/')
+if (str != NULL && str[0] == '/')
 {
 return (1);
 }
@@ -40,7 +38,7 @@ free(path_buffer);
 path_buffer = NULL;
 }
 path_buffer = malloc(strlen(token) + strlen(file_name) + 2);
-if (path_buffer)
+if (!path_buffer)
 {
 perror("Error: failed malloc");
 exit(EXIT_FAILURE);

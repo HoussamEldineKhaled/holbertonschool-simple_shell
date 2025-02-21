@@ -64,11 +64,17 @@ int i = 0, status = 0;
 (void)argc, (void)argv;
 while (1)
 {
-write(STDOUT_FILENO, "$ ", 2);
+if (isatty(STDIN_FILENO))
+{
+write(STDOUT_FILENO, "$ ", 3);
+}
 nread = getline(&buf, &count, stdin);
 if (nread == -1)
 {
+if (isatty(STDIN_FILENO))
+{
 write(STDOUT_FILENO, "\n", 2);
+}
 free(buf);
 exit(1);
 }
