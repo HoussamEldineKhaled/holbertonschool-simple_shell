@@ -78,7 +78,7 @@ char *get_file_path(char *file_name)
 {
 char *full_path;
 char *path = getenv("PATH");
-if (startsWithForwardSlash(file_name) && access(fine_name, X_OK) == 0)
+if (startsWithForwardSlash(file_name) && access(file_name, X_OK) == 0)
 {
 return (strdup(file_name));
 }

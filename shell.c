@@ -1,14 +1,14 @@
 #include "shell.h"
-
 /**
  * tokenize - malloc array and set token
- * @token: token
  * @array: array for token
  * @i: index
+ * @buf: buffer
 */
-
-void tokenize(char *token, char **array, int i)
+void tokenize(char **array, int i, char *buf)
 {
+char *token;
+token = strtok(buf, " \n");
 while (token)
 {
 array[i] = token;
@@ -17,18 +17,20 @@ i++;
 }
 array[i] = NULL;
 }
-
 /**
  * exec_cmd - execute command
  * @child: new process
  * @array: command
  * @status: execution status
 */
-void exec_cmd(pid_t child, char **array, int status, char *path)
+void exec_cmd(pid_t child, char **array, int status, char *path, char *buf)
 {
 if (child == -1)
 {
 perror("Creation Failure");
+free(buf);
+free(array);
+free(path);
 exit(41);
 }
 if (child == 0)
@@ -53,7 +55,7 @@ wait(&status);
 */
 int main(int argc, char *argv[])
 {
-  char *buf = NULL, *token = NULL, *path = NULL;
+char *buf = NULL, *path = NULL;
 char **array = NULL;
 size_t count = 0;
 ssize_t nread;
@@ -70,14 +72,21 @@ write(STDOUT_FILENO, "\n", 2);
 free(buf);
 exit(1);
 }
-token = strtok(buf, "\n");
 array = malloc(sizeof(char*) * 1024);
+if (array == NULL)
+{
+perror("malloc failure");
+free(buf);
+exit(EXIT_FAILURE);
+}
 i = 0;
-tokenize(token, array, i);
+tokenize(array, i, buf);
 path = get_file_path(array[0]);
 child = fork();
-exec_cmd(child, array, status, path);
+exec_cmd(child, array, status, path, buf);
 printf("%s", buf);
+free(array);
+free(path);
 }
 free(buf);
 return (0);
