@@ -1,4 +1,31 @@
 #include "shell.h"
+
+
+
+/**
+ * free_resources - free array resources
+ * @array: array
+ * @buf: buffer
+ * @path: file path
+*/
+void free_resources(char **array, char *buf, char *path)
+{
+int i = 0;
+if (array)
+{
+while (array[i])
+{
+free(array[i]);
+array[i] = NULL;
+i++;
+}
+}
+free(buf);
+buf = NULL;
+free(path);
+path = NULL;
+}
+
 /**
  * tokenize - malloc array and set token
  * @array: array for token
@@ -49,6 +76,7 @@ else
 wait(&status);
 if (WIFEXITED(status))
 {
+free_resources(array, buf, path);
 exit(WEXITSTATUS(status));
 }
 }
