@@ -14,6 +14,7 @@ int main(int argc, char **argv, char **env)
 char input[MAX_INPUT_SIZE];
 char *args[MAX_INPUT_SIZE];
 int i;
+size_t size;
 pid_t child;
 int status;
 (void)argc;
@@ -21,9 +22,10 @@ int status;
 while(1)
 {
 printf("$ ");
-if (fgets(input, MAX_INPUT_SIZE, stdin) == NULL)
+if (getline(input, &size, stdin) == -1)
 {
 printf("\n");
+free(input);
 break;
 }
 input[strcspn(input, "\n")] = '\0';
@@ -53,5 +55,6 @@ else
 wait(&status);
 }
 }
+free(input);
 return (0);
 }
