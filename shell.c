@@ -2,6 +2,33 @@
 #define MAX_INPUT_SIZE 1024
 
 
+
+/**
+ * get_path_from_env - get env path
+ * @env: environment variable
+ * Return: NULL or env
+*/
+
+
+char *get_path_from_env(char **env)
+{
+int i = 0;
+while (env[i] != NULL)
+{
+if (strncmp(env[i], "PATH=", 5) == 0)
+{
+return (env[i] + 5);
+}
+i++;
+}
+return (NULL);
+}
+
+
+
+
+
+
 /**
  * main - shell program
  * @argc: arg size
@@ -49,8 +76,16 @@ free(input);
 input = NULL;
 continue;
 }
-path = getenv("PATH");
+path = get_path_from_env(env);
+if (path == NULL)
+{
+fprintf(stderr, "PATH not found in environment\n");
+free(input);
+input = NULL;
+continue;
+}
 path_copy = strdup(path);
+dir = strtok(path_copy, ":");
 full_path = NULL;
 command_found = 0;
 while (dir != NULL)
@@ -100,6 +135,7 @@ else
 {
 wait(&status);
 }
+free(full_path);
 free(input);
 input = NULL;
 }
