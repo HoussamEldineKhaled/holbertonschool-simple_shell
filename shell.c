@@ -106,6 +106,7 @@ if (child == 0)
 if (execve(*path, array, environ) == -1)
 {
 perror("Execution Failure");
+free_resources(array, buf, path);
 exit(EXIT_FAILURE);
 }
 }
