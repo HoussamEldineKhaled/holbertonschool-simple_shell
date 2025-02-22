@@ -22,7 +22,7 @@ int status;
 while(1)
 {
 printf("$ ");
-if (getline(input, &size, stdin) == -1)
+if (getline(&input, &size, stdin) == -1)
 {
 printf("\n");
 free(input);
