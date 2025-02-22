@@ -117,7 +117,7 @@ else
 wait(status);
 if (WIFEXITED(*status) && WEXITSTATUS(*status) == 0)
 {
-print("Ok\n");
+printf("Ok\n");
 }
 free_resources(array, buf, path);
 }
