@@ -54,7 +54,7 @@ else
 {
 wait(&status);
 }
-}
 free(input);
+}
 return (0);
 }
