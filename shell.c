@@ -11,10 +11,10 @@
 */
 int main(int argc, char **argv, char **env)
 {
-char input[MAX_INPUT_SIZE];
+char *input = NULL;
 char *args[MAX_INPUT_SIZE];
 int i;
-size_t size;
+size_t size = 0;
 pid_t child;
 int status;
 (void)argc;
