@@ -11,11 +11,8 @@
 #include <sys/stat.h>
 
 extern char **environ;
-void tokenize(char ***array, char *buf);
-void exec_cmd(pid_t child, char **array, int *status, char **path, char **buf);
-void free_resources(char **array, char **buf, char **path);
-char *get_file_path(char *file_name);
-char *get_file_loc(char *path, char *file_name);
-int startsWithForwardSlash(const char *str);
+
+
+
 
 #endif
