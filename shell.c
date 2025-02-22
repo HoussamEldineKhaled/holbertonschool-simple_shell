@@ -16,6 +16,8 @@ free(array[i]);
 array[i] = NULL;
 i++;
 }
+free(array);
+array = NULL;
 }
 if (buf && *buf)
 {
@@ -113,10 +115,11 @@ exit(EXIT_FAILURE);
 else
 {
 wait(status);
-if (WIFEXITED(*status))
+if (WIFEXITED(*status) && WEXITSTATUS(*status) == 0)
 {
-free_resources(array, buf, path);
+print("Ok\n");
 }
+free_resources(array, buf, path);
 }
 }
 
