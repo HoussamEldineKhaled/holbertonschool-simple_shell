@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+extern char **environ;
 void tokenize(char **array, int i, char *buf);
 void exec_cmd(pid_t child, char **array, int status, char *path, char *buf);
 char *get_file_path(char *file_name);

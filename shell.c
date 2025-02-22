@@ -47,6 +47,10 @@ exit(97);
 else
 {
 wait(&status);
+if (WIFEXITED(status))
+{
+exit(WEXITSTATUS(status));
+}
 }
 }
 
