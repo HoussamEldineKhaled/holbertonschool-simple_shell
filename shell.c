@@ -40,6 +40,7 @@ child = fork();
 if (child == -1)
 {
 perror("fork");
+free(input);
 exit(EXIT_FAILURE);
 }
 else if (child == 0)
@@ -47,6 +48,7 @@ else if (child == 0)
 if (execve(args[0], args, env) == -1)
 {
 perror(args[0]);
+free(input);
 exit(EXIT_FAILURE);
 }
 }
@@ -55,6 +57,7 @@ else
 wait(&status);
 }
 free(input);
+input = NULL;
 }
 return (0);
 }
