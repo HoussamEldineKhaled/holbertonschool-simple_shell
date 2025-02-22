@@ -158,7 +158,7 @@ if (isatty(STDIN_FILENO))
 {
 write(STDOUT_FILENO, "\n", 1);
 }
-free_resources(NULL, &buf, NULL);
+free_resources(array, &buf, NULL);
 exit(EXIT_SUCCESS);
 }
 buf[nread - 1] = '\0';
