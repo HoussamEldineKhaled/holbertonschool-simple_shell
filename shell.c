@@ -177,6 +177,10 @@ continue;
 }
 child = fork();
 exec_cmd(child, array, &status, &path, &buf);
+if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
+{
+printf("OK\n");
+}
 }
 free_resources(array, &buf, &path);
 return (0);
