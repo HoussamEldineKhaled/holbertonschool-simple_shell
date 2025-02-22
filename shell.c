@@ -21,10 +21,16 @@ int status;
 (void)argv;
 while(1)
 {
+if (isatty(STDIN_FILENO))
+{
 printf("$ ");
+}
 if (getline(&input, &size, stdin) == -1)
 {
+if (isatty(STDIN_FILENO))
+{
 printf("\n");
+}
 free(input);
 break;
 }
