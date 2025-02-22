@@ -42,6 +42,12 @@ while (args[i] != NULL)
 i++;
 args[i] = strtok(NULL, " ");
 }
+if (args[0] == NULL)
+{
+free(input);
+input = NULL;
+continue;
+}
 child = fork();
 if (child == -1)
 {
