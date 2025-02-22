@@ -118,7 +118,6 @@ continue;
 }
 child = fork();
 exec_cmd(child, array, status, path, buf);
-printf("%s", buf);
 free(array);
 free(path);
 }
