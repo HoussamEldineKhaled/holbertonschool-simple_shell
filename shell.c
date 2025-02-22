@@ -105,6 +105,7 @@ command_found = 1;
 break;
 }
 free(full_path);
+full_path = NULL;
 dir = strtok(NULL, ":");
 }
 free(path_copy);
@@ -124,9 +125,10 @@ exit(EXIT_FAILURE);
 }
 else if (child == 0)
 {
-if (execve(args[0], args, env) == -1)
+if (execve(full_path, args, env) == -1)
 {
 perror(args[0]);
+free(full_path);
 free(input);
 exit(EXIT_FAILURE);
 }
