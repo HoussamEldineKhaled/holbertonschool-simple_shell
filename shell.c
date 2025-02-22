@@ -1,7 +1,4 @@
 #include "shell.h"
-
-
-
 /**
  * free_resources - free array resources
  * @array: array
@@ -20,10 +17,16 @@ array[i] = NULL;
 i++;
 }
 }
+if (buf)
+{
 free(buf);
 buf = NULL;
+}
+if (path)
+{
 free(path);
 path = NULL;
+}
 }
 
 /**
@@ -38,7 +41,12 @@ char *token;
 token = strtok(buf, " \n");
 while (token)
 {
-array[i] = token;
+array[i] = strdup(token);
+if (!array[i])
+{
+perror("strdup failed");
+exit(EXIT_FAILURE);
+}
 token = strtok(NULL, " \n");
 i++;
 }
@@ -65,9 +73,6 @@ if (child == 0)
 if (execve(path, array, NULL) == -1)
 {
 perror("Execution Failure");
-free(buf);
-free(array);
-free(path);
 exit(97);
 }
 }
@@ -78,6 +83,8 @@ if (WIFEXITED(status))
 {
 free_resources(array, buf, path);
 exit(WEXITSTATUS(status));
+array = NULL;
+buf = path = NULL;
 }
 }
 }
@@ -114,11 +121,12 @@ if (nread == -1)
 {
 if (isatty(STDIN_FILENO))
 {
-write(STDOUT_FILENO, "\n", 2);
+write(STDOUT_FILENO, "\n", 1);
 }
 free(buf);
 exit(1);
 }
+buf[nread - 1] = '\0';
 if (buf[nread - 1] == '\n')
 {
 buf[nread - 1] = '\0';
@@ -150,9 +158,7 @@ continue;
 }
 child = fork();
 exec_cmd(child, array, status, path, buf);
-free(array);
-free(path);
+buf = NULL;
 }
-free(buf);
 return (0);
 }
