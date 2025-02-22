@@ -103,7 +103,7 @@ exit(EXIT_FAILURE);
 }
 if (child == 0)
 {
-if (execve(*path, array, NULL) == -1)
+if (execve(*path, array, environ) == -1)
 {
 perror("Execution Failure");
 exit(EXIT_FAILURE);
@@ -158,7 +158,7 @@ if (isatty(STDIN_FILENO))
 {
 write(STDOUT_FILENO, "\n", 1);
 }
-free_resources(array, &buf, NULL);
+free_resources(array, &buf, &path);
 exit(EXIT_SUCCESS);
 }
 buf[nread - 1] = '\0';
@@ -171,12 +171,12 @@ path = get_file_path(array[0]);
 if (!path)
 {
 printf("Command not found: %s\n", array[0]);
-free_resources(array, &buf, NULL);
+free_resources(array, &buf, &path);
 continue;
 }
 child = fork();
 exec_cmd(child, array, &status, &path, &buf);
 }
-free_resources(array, &buf, NULL);
+free_resources(array, &buf, &path);
 return (0);
 }

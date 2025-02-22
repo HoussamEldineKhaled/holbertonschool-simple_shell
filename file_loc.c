@@ -15,14 +15,15 @@ return (0);
 }
 
 
+
+
+
 /**
  * get_file_loc - location of file
  * @path: file path
  * @file_name: file name
  * Return: NULL or location
 */
-
-
 char *get_file_loc(char *path, char *file_name)
 {
 char *path_copy, *token;
@@ -69,9 +70,6 @@ return (NULL);
  * @file_name: name of file
  * Return: NULL or the full path
 */
-
-
-
 char *get_file_path(char *file_name)
 {
 char *full_path;
