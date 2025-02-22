@@ -38,6 +38,9 @@ if (child == 0)
 if (execve(path, array, NULL) == -1)
 {
 perror("Execution Failure");
+free(buf);
+free(array);
+free(path);
 exit(97);
 }
 }
@@ -66,7 +69,13 @@ while (1)
 {
 if (isatty(STDIN_FILENO))
 {
-write(STDOUT_FILENO, "$ ", 3);
+write(STDOUT_FILENO, "$ ", 2);
+}
+if (buf != NULL)
+{
+free(buf);
+buf = NULL;
+count = 0;
 }
 nread = getline(&buf, &count, stdin);
 if (nread == -1)
@@ -78,6 +87,14 @@ write(STDOUT_FILENO, "\n", 2);
 free(buf);
 exit(1);
 }
+if (buf[nread - 1] == '\n')
+{
+buf[nread - 1] = '\0';
+}
+if (nread > 0 && buf[nread - 1] == '\n')
+{
+buf[nread - 1] = '\0';
+}
 array = malloc(sizeof(char*) * 1024);
 if (array == NULL)
 {
@@ -87,7 +104,18 @@ exit(EXIT_FAILURE);
 }
 i = 0;
 tokenize(array, i, buf);
+if (array[0] == NULL)
+{
+free(array);
+continue;
+}
 path = get_file_path(array[0]);
+if (path == NULL)
+{
+printf("Command not found: %s\n", array[0]);
+free(array);
+continue;
+}
 child = fork();
 exec_cmd(child, array, status, path, buf);
 printf("%s", buf);
