@@ -42,7 +42,7 @@ pid_t child;
 struct stat st;
 (void)argc;
 (void)argv;
-while(1)
+while (1)
 {
 if (isatty(STDIN_FILENO))
 {
