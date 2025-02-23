@@ -115,6 +115,7 @@ exit(127);
 else
 {
 path = get_path_from_env(env);
+printf("PATH: %s\n", path);
 if (path == NULL)
 {
 fprintf(stderr, "%s: 1: %s: found\n", argv[0], args[0]);
@@ -153,7 +154,7 @@ if (!command_found)
 fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
 free(input);
 input = NULL;
-exit(127);
+continue;
 }
 child = fork();
 if (child == -1)
