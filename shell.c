@@ -88,17 +88,22 @@ if (execve(args[0], args, env) == -1)
 {
 fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
 free(input);
-exit(EXIT_FAILURE);
+exit(127);
 }
 }
 else
 {
-wait(&status);
+waitpid(child, &status, 0);
+if (WIFEXITED(status))
+{
+status = WEXITSTATUS(status);
+}
 }
 }
 else
 {
 fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
+status = 127;
 }
 }
 else
@@ -141,6 +146,7 @@ if (!command_found)
 fprintf(stderr, "%s: command not found\n", args[0]);
 free(input);
 input = NULL;
+status = 127;
 continue;
 }
 child = fork();
@@ -157,12 +163,16 @@ if (execve(full_path, args, env) == -1)
 perror(args[0]);
 free(full_path);
 free(input);
-exit(EXIT_FAILURE);
+exit(127);
 }
 }
 else
 {
-wait(&status);
+waitpid(child, &status, 0);
+if (WIFEXITED(status))
+{
+status = WEXITSTATUS(status);
+}
 }
 free(full_path);
 }
