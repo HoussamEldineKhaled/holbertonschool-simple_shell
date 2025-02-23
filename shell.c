@@ -58,7 +58,7 @@ free(input);
 break;
 }
 input[strcspn(input, "\n")] = '\0';
-args[0] = strtok(input, "\t\r\n");
+args[0] = strtok(input, " ");
 if (args[0] == NULL)
 {
 free(input);
@@ -109,7 +109,7 @@ status = WEXITSTATUS(status);
 else
 {
 fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
-exit(127);
+status = 127;
 }
 }
 else
