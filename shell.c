@@ -109,7 +109,7 @@ status = WEXITSTATUS(status);
 else
 {
 fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
-status = 127;
+exit(127);
 }
 }
 else
@@ -153,8 +153,7 @@ if (!command_found)
 fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
 free(input);
 input = NULL;
-status = 127;
-continue;
+exit(127);
 }
 child = fork();
 if (child == -1)
