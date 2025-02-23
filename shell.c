@@ -111,7 +111,7 @@ else
 path = get_path_from_env(env);
 if (path == NULL)
 {
-fprintf(stderr, "PATH not found in environment\n");
+fprintf(stderr, "%s: 1: %s: found\n");
 free(input);
 input = NULL;
 continue;
