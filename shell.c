@@ -58,7 +58,7 @@ free(input);
 break;
 }
 input[strcspn(input, "\n")] = '\0';
-args[0] = strtok(input, " ");
+args[0] = strtok(input, "\t\r\n");
 if (args[0] == NULL)
 {
 free(input);
@@ -116,7 +116,7 @@ else
 {
 path = get_path_from_env(env);
 printf("PATH: %s\n", path);
-if (path == NULL)
+if (path == NULL || strlen(path) == 0)
 {
 fprintf(stderr, "%s: 1: %s: found\n", argv[0], args[0]);
 free(input);
@@ -154,6 +154,7 @@ if (!command_found)
 fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
 free(input);
 input = NULL;
+status = 127;
 continue;
 }
 child = fork();
