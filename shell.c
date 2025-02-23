@@ -111,9 +111,10 @@ else
 path = get_path_from_env(env);
 if (path == NULL)
 {
-  fprintf(stderr, "%s: 1: %s: found\n", argv[0], args[0]);
+fprintf(stderr, "%s: 1: %s: found\n", argv[0], args[0]);
 free(input);
 input = NULL;
+status = 127;
 continue;
 }
 path_copy = strdup(path);
@@ -160,7 +161,7 @@ else if (child == 0)
 {
 if (execve(full_path, args, env) == -1)
 {
-perror(args[0]);
+fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
 free(full_path);
 free(input);
 exit(127);
