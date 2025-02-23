@@ -115,7 +115,7 @@ status = 127;
 else
 {
 path = get_path_from_env(env);
-if (path == NULL)
+if (path == NULL || *path == '\0')
 {
 fprintf(stderr, "%s: 1: %s: found\n", argv[0], args[0]);
 free(input);
