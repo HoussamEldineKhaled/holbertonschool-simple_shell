@@ -178,6 +178,10 @@ free(full_path);
 }
 free(input);
 input = NULL;
+if (status != 0)
+{
+exit(status);
+}
 }
 return (0);
 }
