@@ -59,6 +59,12 @@ break;
 }
 input[strcspn(input, "\n")] = '\0';
 args[0] = strtok(input, " ");
+if (args[0] == NULL)
+{
+free(input);
+input = NULL;
+continue;
+}
 i = 0;
 while (args[i] != NULL)
 {
