@@ -143,7 +143,7 @@ dir = strtok(NULL, ":");
 free(path_copy);
 if (!command_found)
 {
-fprintf(stderr, "%s: command not found\n", args[0]);
+fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
 free(input);
 input = NULL;
 status = 127;
