@@ -2,7 +2,6 @@
 #define MAX_INPUT_SIZE 1024
 
 
-
 /**
  * get_path_from_env - get env path
  * @env: environment variable
@@ -25,10 +24,6 @@ return (NULL);
 }
 
 
-
-
-
-
 /**
  * main - shell program
  * @argc: arg size
@@ -40,6 +35,7 @@ int main(int argc, char **argv, char **env)
 {
 char *input = NULL, *dir, *full_path, *path;
 char *path_copy;
+char resolved_path[PATH_MAX];
 char *args[MAX_INPUT_SIZE];
 int i , status, command_found;
 size_t size = 0;
@@ -76,6 +72,45 @@ free(input);
 input = NULL;
 continue;
 }
+if (args[0][0] == '/' || args[0][0] == '.')
+{
+if (realpath(args[0], resolved_path) == NULL)
+{
+fprintf(stderr, "%s: 1: %s not found\n", argv[0], args[0]);
+free(input);
+input = NULL;
+continue;
+}
+if (stat(resolved_path, &st) == 0 && (st.st_mode & S_IXUSR))
+{
+child = fork();
+if (child == -1)
+{
+perror("fork");
+free(input);
+exit(EXIT_FAILURE);
+}
+else if (child == 0)
+{
+if (execve(resolved_path, args, env) == -1)
+{
+fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
+free(input);
+exit(EXIT_FAILURE);
+}
+}
+else
+{
+wait(&status);
+}
+}
+else
+{
+fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
+}
+}
+else
+{
 path = get_path_from_env(env);
 if (path == NULL)
 {
@@ -138,6 +173,7 @@ else
 wait(&status);
 }
 free(full_path);
+}
 free(input);
 input = NULL;
 }
