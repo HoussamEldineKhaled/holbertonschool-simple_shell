@@ -36,7 +36,7 @@ int main(int argc, char **argv, char **env)
 char *input = NULL, *dir, *full_path, *path;
 char *path_copy;
 char *args[MAX_INPUT_SIZE];
-int i , status, command_found;
+int i, j = 0, status, command_found;
 size_t size = 0;
 pid_t child;
 struct stat st;
@@ -69,6 +69,18 @@ if (strcmp(args[0], "exit") == 0)
 {
 free(input);
 exit(0);
+}
+if (strcmp(args[0], "env") == 0)
+{
+j = 0;
+while (env[j] != NULL)
+{
+printf("%s\n", env[j]);
+j++;
+}
+free(input);
+input = NULL;
+continue;
 }
 i = 0;
 while (args[i] != NULL)
