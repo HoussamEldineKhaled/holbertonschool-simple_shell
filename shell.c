@@ -65,6 +65,11 @@ free(input);
 input = NULL;
 continue;
 }
+if (strcmp(args[0], "exist") == 0)
+{
+free(input);
+exit(0);
+}
 i = 0;
 while (args[i] != NULL)
 {
