@@ -58,17 +58,17 @@ free(input);
 break;
 }
 input[strcspn(input, "\n")] = '\0';
+if (strcmp(args[0], "exist") == 0)
+{
+free(input);
+exit(0);
+}
 args[0] = strtok(input, " ");
 if (args[0] == NULL)
 {
 free(input);
 input = NULL;
 continue;
-}
-if (strcmp(args[0], "exist") == 0)
-{
-free(input);
-exit(0);
 }
 i = 0;
 while (args[i] != NULL)
