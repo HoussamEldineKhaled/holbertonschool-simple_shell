@@ -65,7 +65,7 @@ free(input);
 input = NULL;
 continue;
 }
-if (strcmp(args[0], "exist") == 0)
+if (strcmp(args[0], "exit") == 0)
 {
 free(input);
 exit(0);
