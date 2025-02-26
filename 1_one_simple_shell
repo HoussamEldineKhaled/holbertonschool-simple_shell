@@ -2,13 +2,18 @@
 .TH man 1 "25 February 2025"
 .SH NAME
 1_one_simpple_shell - implement shell
+shell.h = functions
+shell.c - main function
+README.md - what the project is about
 .SH SYNOPSIS
-
+get_path_from_env [env]
+main [argc] [argv] [env]
 .SH DESCRIPTION
-
+get_path_from_env: get the file path from the evironment
+main: main method
 .SH OPTIONS
-
+get_path_from_env: no options
 .SH BUGS
-
+A few bugs
 .SH AUTHOR
 written by Houssam El Dine Khaled and Mohammad Aoun
