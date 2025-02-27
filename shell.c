@@ -138,7 +138,7 @@ fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
 free(input);
 input = NULL;
 status = 127;
-continue;
+exit(status);
 }
 path_copy = strdup(path);
 dir = strtok(path_copy, ":");
@@ -171,7 +171,7 @@ fprintf(stderr, "%s: 1: %s: not found\n", argv[0], args[0]);
 free(input);
 input = NULL;
 status = 127;
-continue;
+exit(status);
 }
 child = fork();
 if (child == -1)
